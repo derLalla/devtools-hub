@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { Types } from "mongoose";
 import { z } from "zod";
-import { Link } from "../models/Link";
+import { Link, type ILink } from "../models/Link";
 import { requireAuth, requireAdmin } from "../middleware/auth";
 
 const urlSchema = z
@@ -22,7 +22,7 @@ const linkInputSchema = z.object({
 
 const linkPatchSchema = linkInputSchema.partial();
 
-function serialize(link: import("../models/Link").ILink) {
+function serialize(link: ILink) {
   return {
     id: link._id.toString(),
     title: link.title,
@@ -42,7 +42,7 @@ linksRouter.get("/", async (_req, res, next) => {
   try {
     const links = await Link.find()
       .sort({ sortOrder: 1, title: 1 })
-      .lean<import("../models/Link").ILink[]>();
+      .lean<ILink[]>();
     res.json(links.map(serialize));
   } catch (err) {
     next(err);

@@ -154,7 +154,7 @@ A link object looks like:
 {
   "id": "66b3…",
   "title": "Grafana",
-  "url": "https://grafana.example.com",
+  "url": "https://grafana.com",
   "description": "Dashboards and metrics",
   "icon": "https://grafana.com/static/img/menu/grafana2.svg",
   "category": "Observability",
