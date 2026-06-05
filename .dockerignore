@@ -7,6 +7,6 @@
 **/.env.local
 **/coverage
 **/.vite
-**/*.log
-**/.DS_Store
+**/\*.log
+\*\*/.DS_Store
 README.md

@@ -1,4 +1,4 @@
-import { Schema, model, Document, Types } from 'mongoose';
+import { Schema, model, Document, Types } from "mongoose";
 
 export interface ILink extends Document {
   _id: Types.ObjectId;
@@ -21,11 +21,11 @@ const linkSchema = new Schema<ILink>(
     icon: { type: String, trim: true, maxlength: 512 },
     category: { type: String, trim: true, maxlength: 100 },
     sortOrder: { type: Number, default: 0, index: true },
-    createdBy: { type: Schema.Types.ObjectId, ref: 'User' }
+    createdBy: { type: Schema.Types.ObjectId, ref: "User" },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 linkSchema.index({ sortOrder: 1, title: 1 });
 
-export const Link = model<ILink>('Link', linkSchema);
+export const Link = model<ILink>("Link", linkSchema);

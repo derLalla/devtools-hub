@@ -1,8 +1,8 @@
-import { defineStore } from 'pinia';
-import { ref, computed } from 'vue';
-import { api, setAuthToken } from '../api/client';
+import { defineStore } from "pinia";
+import { ref, computed } from "vue";
+import { api, setAuthToken } from "../api/client";
 
-const STORAGE_KEY = 'devtools.auth';
+const STORAGE_KEY = "devtools.auth";
 
 interface StoredAuth {
   token: string;
@@ -18,7 +18,7 @@ function readStored(): StoredAuth | null {
   }
 }
 
-export const useAuthStore = defineStore('auth', () => {
+export const useAuthStore = defineStore("auth", () => {
   const initial = readStored();
   const token = ref<string | null>(initial?.token ?? null);
   const username = ref<string | null>(initial?.username ?? null);
@@ -28,11 +28,17 @@ export const useAuthStore = defineStore('auth', () => {
   const isAuthenticated = computed(() => !!token.value);
 
   async function login(user: string, password: string): Promise<void> {
-    const { data } = await api.post('/auth/login', { username: user, password });
+    const { data } = await api.post("/auth/login", {
+      username: user,
+      password,
+    });
     token.value = data.token;
     username.value = data.user.username;
     setAuthToken(data.token);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({ token: data.token, username: data.user.username }));
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify({ token: data.token, username: data.user.username }),
+    );
   }
 
   function logout(): void {

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { onMounted, ref, computed } from 'vue';
-import { listLinks, type LinkDto } from '../api/client';
+import { onMounted, ref, computed } from "vue";
+import { listLinks, type LinkDto } from "../api/client";
 
 const links = ref<LinkDto[]>([]);
 const loading = ref(true);
@@ -15,8 +15,8 @@ function initials(title: string): string {
     .split(/\s+/)
     .filter(Boolean)
     .slice(0, 2)
-    .map((w) => w[0]?.toUpperCase() ?? '')
-    .join('');
+    .map((w) => w[0]?.toUpperCase() ?? "")
+    .join("");
 }
 
 async function load() {
@@ -25,7 +25,7 @@ async function load() {
   try {
     links.value = await listLinks();
   } catch (e) {
-    error.value = 'Failed to load links.';
+    error.value = "Failed to load links.";
     console.error(e);
   } finally {
     loading.value = false;
@@ -55,7 +55,11 @@ const hasLinks = computed(() => links.value.length > 0);
         class="card"
       >
         <div class="icon">
-          <img v-if="link.icon && isUrl(link.icon)" :src="link.icon" :alt="link.title" />
+          <img
+            v-if="link.icon && isUrl(link.icon)"
+            :src="link.icon"
+            :alt="link.title"
+          />
           <span v-else>{{ initials(link.title) }}</span>
         </div>
         <span v-if="link.category" class="category">{{ link.category }}</span>
