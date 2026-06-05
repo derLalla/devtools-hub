@@ -1,0 +1,12 @@
+**/node_modules
+**/dist
+**/build
+**/.git
+**/.github
+**/.env
+**/.env.local
+**/coverage
+**/.vite
+**/*.log
+**/.DS_Store
+README.md
